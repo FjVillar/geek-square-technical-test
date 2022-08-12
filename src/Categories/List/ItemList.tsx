@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { CategoryItem } from "../../Categories/types";
-import { Item } from "../Item";
+import Item from "./Item/Item";
 
 interface ItemListProps {
   items: CategoryItem[];

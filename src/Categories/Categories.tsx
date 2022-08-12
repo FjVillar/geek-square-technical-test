@@ -1,11 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { ItemList } from "../components/ItemList";
 
 import { FC } from "react";
 import getCategories from "./api";
-import { Category } from "./types";
-import axios from "axios";
 import { getCategoriesResponse } from "./api";
+import { ItemList } from "./List";
 
 const Categories: FC = () => {
   const { data, error } = useQuery<getCategoriesResponse>(

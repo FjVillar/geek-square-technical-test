@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Typography } from "../Typography";
+import { Typography } from "../../../components/Typography";
 
 interface ItemProps {
   imageUrl: string;
