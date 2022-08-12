@@ -22,3 +22,12 @@ features.
 ## Git history and Conventional Commits
 
 Im using [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) to write my commit title and messages. It is possible to configure conventional commit with [Husky](https://www.npmjs.com/package/husky) to lint commit messages. With this, developers will not be allowed to create commit messages outside of the conventional commits convention but I have left this out for now.
+
+
+## API: Express, Axios and React Query
+
+I've created a tiny server project to serve the JSON with the data to be consumed by the aplication. It is a Express server with only one endpoint `/categories`. On the aplication I've added two dependencies to manage fetching and async treatment of data. For fetching I've decided to use `axios` which as tiny library for data fetching and is very complete. I was tempted on using javascript fetch for this purpose but It came faster to do it this way with react query which is other tiny library to manage asynchronous calls and asynchronous state management. 
+
+I didn't have the need to this point to add Redux for app state management. Because to fullfil the requirements of the technical test it's not necessary, but in a real case scenario where we have several modules or more shared data through the application It would came necessary to add some kind of global application state management or at least React Context.
+
+
