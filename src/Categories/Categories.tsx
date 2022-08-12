@@ -15,7 +15,6 @@ const Categories: FC = () => {
 
   return (
     <>
-      App
       {data?.categories.map((category) => (
         <ItemList key={category.title} items={category.items} />
       ))}
