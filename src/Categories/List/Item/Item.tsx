@@ -18,8 +18,8 @@ const StyledImg = styled("img")({
 const Item: FC<ItemProps> = ({ imageUrl, title, description }) => (
   <GridContainer rows={[255, 30, 200]} columns={1}>
     <StyledImg src={imageUrl} />
-    <Typography>{title}</Typography>
-    <Typography>{description}</Typography>
+    <Typography variant="title">{title}</Typography>
+    <Typography variant="caption">{description}</Typography>
     {/* Action by status component */}
   </GridContainer>
 );

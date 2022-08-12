@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { FC } from "react";
+import { Typography } from "../components/Typography";
 import getCategories from "./api";
 import { getCategoriesResponse } from "./api";
 import { ItemList } from "./List";
@@ -15,6 +16,7 @@ const Categories: FC = () => {
 
   return (
     <>
+      <Typography variant="section">FAVORITOS</Typography>
       {data?.categories.map((category) => (
         <ItemList key={category.title} items={category.items} />
       ))}
