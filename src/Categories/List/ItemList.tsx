@@ -3,10 +3,7 @@ import { FC } from "react";
 import { CategoryItem } from "../../Categories/types";
 import { GridContainer } from "../../components/GridContainer";
 import Item from "./Item/Item";
-
-interface ItemListProps {
-  items: CategoryItem[];
-}
+import { Typography } from "../../components/Typography";
 
 const StyledGridContainer = styled(GridContainer)({
   overflowY: "hidden",
@@ -34,22 +31,30 @@ const StyledGridContainer = styled(GridContainer)({
   },
 });
 
-const ItemList: FC<ItemListProps> = ({ items }) => (
-  <StyledGridContainer
-    columns={items.length}
-    rows={1}
-    spacing={20}
-    columnSize={200}
-  >
-    {items.map(({ id, image_url, title, description }) => (
-      <Item
-        key={id}
-        imageUrl={image_url}
-        title={title}
-        description={description}
-      />
-    ))}
-  </StyledGridContainer>
+interface ItemListProps {
+  items: CategoryItem[];
+  sectionTitle: string;
+}
+
+const ItemList: FC<ItemListProps> = ({ items, sectionTitle }) => (
+  <>
+    <Typography variant="section">{sectionTitle}</Typography>
+    <StyledGridContainer
+      columns={items.length}
+      rows={1}
+      spacing={20}
+      columnSize={200}
+    >
+      {items.map(({ id, image_url, title, description }) => (
+        <Item
+          key={id}
+          imageUrl={image_url}
+          title={title}
+          description={description}
+        />
+      ))}
+    </StyledGridContainer>
+  </>
 );
 
 export default ItemList;
