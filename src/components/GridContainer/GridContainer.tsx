@@ -28,7 +28,6 @@ const GridContainer = styled("div")<StyledGridContainerProps>(
     // if rows is an array
     if (rows instanceof Object) {
       gridTemplateRows = `${rows.map((row) => `${row}px `).join("")}`;
-      console.log("gridTemplateColumns", gridTemplateColumns);
     } else {
       gridTemplateRows = `repeat(${rows}, ${
         rowSize ? `${rowSize}px` : "auto"
@@ -40,7 +39,6 @@ const GridContainer = styled("div")<StyledGridContainerProps>(
       gridTemplateColumns,
       gridTemplateRows,
       gridGap: spacing ? `${spacing}px` : "10px",
-      justifyItems: "self-start",
     };
   }
 );

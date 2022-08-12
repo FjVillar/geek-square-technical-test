@@ -12,11 +12,11 @@ interface ItemProps {
 const StyledImg = styled("img")({
   objectFit: "cover",
   width: "100%",
-  maxHeight: "100%",
+  height: "100%",
 });
 
 const Item: FC<ItemProps> = ({ imageUrl, title, description }) => (
-  <GridContainer rows={[255, 30, 200]} columns={1}>
+  <GridContainer rows={[300, 35, 100]} columns={1} spacing={10}>
     <StyledImg src={imageUrl} />
     <Typography variant="title">{title}</Typography>
     <Typography variant="caption">{description}</Typography>

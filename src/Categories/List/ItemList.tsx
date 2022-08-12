@@ -1,3 +1,4 @@
+import styled from "@emotion/styled";
 import { FC } from "react";
 import { CategoryItem } from "../../Categories/types";
 import { GridContainer } from "../../components/GridContainer";
@@ -7,13 +8,38 @@ interface ItemListProps {
   items: CategoryItem[];
 }
 
+const StyledGridContainer = styled(GridContainer)({
+  overflowY: "hidden",
+  overflowX: "auto",
+  // This styles only works on Chrome and Safari
+  // in real case scenario we would need to add
+  // styles for chrome and IE
+  "::-webkit-scrollbar": {
+    width: "6px",
+    height: "6px",
+  },
+  "::-webkit-scrollbar-track": {
+    borderRadius: "10px",
+    background: "rgba(0,0,0,0.1)",
+  },
+  "::-webkit-scrollbar-thumb": {
+    borderRadius: "10px",
+    background: "rgba(0,0,0,0.2)",
+  },
+  "::-webkit-scrollbar-thumb:hover": {
+    background: "rgba(0,0,0,0.4)",
+  },
+  "::-webkit-scrollbar-thumb:active": {
+    background: "rgba(0,0,0,.9)",
+  },
+});
+
 const ItemList: FC<ItemListProps> = ({ items }) => (
-  <GridContainer
-    columns={3}
+  <StyledGridContainer
+    columns={items.length}
     rows={1}
-    columnSize={200}
-    rowSize={600}
     spacing={20}
+    columnSize={200}
   >
     {items.map(({ id, image_url, title, description }) => (
       <Item
@@ -23,7 +49,7 @@ const ItemList: FC<ItemListProps> = ({ items }) => (
         description={description}
       />
     ))}
-  </GridContainer>
+  </StyledGridContainer>
 );
 
 export default ItemList;
