@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { FC } from "react";
+import { FC, ReactElement } from "react";
 import { CategoryItem } from "../../Categories/types";
 import { GridContainer } from "../../components/GridContainer";
 import Item from "./Item/Item";
@@ -34,9 +34,10 @@ const StyledGridContainer = styled(GridContainer)({
 interface ItemListProps {
   items: CategoryItem[];
   sectionTitle: string;
+  actionButton: ReactElement;
 }
 
-const ItemList: FC<ItemListProps> = ({ items, sectionTitle }) => (
+const ItemList: FC<ItemListProps> = ({ items, sectionTitle, actionButton }) => (
   <>
     <Typography variant="section">{sectionTitle}</Typography>
     <StyledGridContainer
@@ -51,6 +52,7 @@ const ItemList: FC<ItemListProps> = ({ items, sectionTitle }) => (
           imageUrl={image_url}
           title={title}
           description={description}
+          actionButton={actionButton}
         />
       ))}
     </StyledGridContainer>

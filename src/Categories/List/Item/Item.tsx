@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { FC } from "react";
+import { FC, ReactElement } from "react";
 import { GridContainer } from "../../../components/GridContainer";
 import { Typography } from "../../../components/Typography";
 
@@ -7,6 +7,7 @@ interface ItemProps {
   imageUrl: string;
   title: string;
   description: string;
+  actionButton: ReactElement;
 }
 
 const StyledImg = styled("img")({
@@ -15,12 +16,17 @@ const StyledImg = styled("img")({
   height: "100%",
 });
 
-const Item: FC<ItemProps> = ({ imageUrl, title, description }) => (
-  <GridContainer rows={[300, 35, 100]} columns={1} spacing={10}>
+const Item: FC<ItemProps> = ({
+  imageUrl,
+  title,
+  description,
+  actionButton,
+}) => (
+  <GridContainer rows={[300, 35, 100, 35]} columns={1} spacing={10}>
     <StyledImg src={imageUrl} />
     <Typography variant="title">{title}</Typography>
     <Typography variant="caption">{description}</Typography>
-    {/* Action by status component */}
+    {actionButton}
   </GridContainer>
 );
 

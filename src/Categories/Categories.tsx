@@ -2,10 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 
 import { FC, useState } from "react";
 import { GridContainer } from "../components/GridContainer";
-import { Typography } from "../components/Typography";
+
 import getCategories from "./api";
 import { getCategoriesResponse } from "./api";
 import { ItemList } from "./List";
+import { ActionByStateButton } from "./List/Item/ActionByStateButton";
 import { CategoryItem } from "./types";
 
 const defaultFavorites = [
@@ -35,16 +36,19 @@ const Categories: FC = () => {
 
   const [favorites, setFavorites] = useState<CategoryItem[]>(defaultFavorites);
 
-  console.log("categories", error);
-
   return (
     <GridContainer rows={3} columns={1} spacing={20}>
-      <ItemList sectionTitle="FAVORITOS" items={favorites} />
+      <ItemList
+        sectionTitle="FAVORITOS"
+        items={favorites}
+        actionButton={<ActionByStateButton isFavorite />}
+      />
       {data?.categories.map((category) => (
         <ItemList
           key={category.title}
           sectionTitle={category.title}
           items={category.items}
+          actionButton={<ActionByStateButton />}
         />
       ))}
     </GridContainer>
