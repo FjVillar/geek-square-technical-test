@@ -18,8 +18,6 @@ app.use(function (req, res, next) {
 const port = process.env.PORT || 8080;
 
 app.get("/categories", (req, res) => {
-  console.log("API called");
-  console.log("categoriesWithItem", categoriesWithItems);
   return res.status(200).json(categoriesWithItems);
 });
 

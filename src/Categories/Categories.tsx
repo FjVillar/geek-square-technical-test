@@ -18,6 +18,7 @@ const defaultFavorites = [
     image_url:
       "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRYkjfe8qVH0Z8ftXqb8r7L-1yzFAbYsFkIF0jT_csTTvTYkELx",
     title: "Bullet Train",
+    categoryTitle: "Películas",
   },
   {
     description:
@@ -26,11 +27,12 @@ const defaultFavorites = [
     image_url:
       "https://i.picsum.photos/id/521/200/300.jpg?hmac=_MGlU-tHw5IBlsNL7YvJ9lTMo4Ge605GWQwuKGxWIWU",
     title: "Cassandra Darke",
+    categoryTitle: "Cómics",
   },
 ];
 
 const Categories: FC = () => {
-  const { data, error } = useQuery<getCategoriesResponse>(
+  const { data, error, isLoading } = useQuery<getCategoriesResponse>(
     ["categoriesWithItems"],
     getCategories
   );
@@ -46,36 +48,46 @@ const Categories: FC = () => {
     setFavorites(newFavorites);
   };
 
-  const handleAddToFavorites = (item: CategoryItem) => {
+  const handleAddToFavorites = (item: CategoryItem, categoryTitle: string) => {
     const alreadyInFavoriteItem = favorites.find(
       (favorite) => favorite.id === item.id
     );
 
     // If we haven't found the item in the current favorite list, we add it
+    // we have to add categoryTitle to the item properties. It is explained
+    // why on the README.md
     if (alreadyInFavoriteItem === undefined) {
-      setFavorites([...favorites, item]);
+      setFavorites([...favorites, { ...item, categoryTitle }]);
     }
   };
 
   return (
     <CenteredContainer isMobile={isMobile}>
-      <GridContainer rows={3} columns={1} spacing={20}>
-        <ItemList
-          sectionTitle="FAVORITOS"
-          items={favorites}
-          handleAction={handleRemoveFromFavorites}
-          emptyListMessage="Ups, parece que esto esta muy vacio. Añade algunos favoritos!"
-          isFavorite
-        />
-        {data?.categories.map((category) => (
-          <ItemList
-            key={category.title}
-            sectionTitle={category.title}
-            items={category.items}
-            handleAction={handleAddToFavorites}
-          />
-        ))}
-      </GridContainer>
+      <>
+        {isLoading && "Cargando..."}
+        {error && `Ha ocurrido un error al cargar los datos: ${error}`}
+        {!isLoading && (
+          <GridContainer rows={3} columns={1} spacing={20}>
+            <ItemList
+              sectionTitle="FAVORITOS"
+              items={favorites}
+              handleAction={handleRemoveFromFavorites}
+              emptyListMessage="Ups, parece que esto esta muy vacio. Añade algunos favoritos!"
+              isFavorite
+            />
+            {data?.categories.map((category) => (
+              <ItemList
+                key={category.title}
+                sectionTitle={category.title}
+                items={category.items}
+                handleAction={(item) =>
+                  handleAddToFavorites(item, category.title)
+                }
+              />
+            ))}
+          </GridContainer>
+        )}
+      </>
     </CenteredContainer>
   );
 };

@@ -13,6 +13,7 @@ interface ItemProps {
   imageUrl: string;
   title: string;
   description: string;
+  category: string;
   actionButton: ReactElement;
 }
 
@@ -20,12 +21,14 @@ const Item: FC<ItemProps> = ({
   imageUrl,
   title,
   description,
+  category,
   actionButton,
 }) => (
-  <GridContainer rows={[300, 35, 100, 35]} columns={1} spacing={10}>
+  <GridContainer rows={[300, 35, 100, 35, 35]} columns={1} spacing={10}>
     <StyledImg src={imageUrl} />
     <Typography variant="title">{title}</Typography>
     <Typography variant="caption">{description}</Typography>
+    <Typography variant="caption">{category}</Typography>
     {actionButton}
   </GridContainer>
 );

@@ -60,12 +60,13 @@ const ItemList: FC<ItemListProps> = ({
         spacing={20}
         columnSize={200}
       >
-        {items.map(({ id, image_url, title, description }) => (
+        {items.map(({ id, image_url, title, description, categoryTitle }) => (
           <Item
             key={id}
             imageUrl={image_url}
             title={title}
             description={description}
+            category={categoryTitle || sectionTitle}
             actionButton={
               <ActionByStateButton
                 isFavorite={isFavorite}

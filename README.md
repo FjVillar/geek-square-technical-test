@@ -39,6 +39,18 @@ I have decided to include Emotion to allow me to write CSS in JS. As you can see
 I have created a React hook to know if we are in Mobile or in a Desktop viewport. Is only custom hook I've decided to create for now, it simply uses
 window match Media with an EventListener attached to it. When we resize the application the hook changes it result value. 
 
+## The category title issue
 
+I've been struggling a bit with an issue with the category title. As you can see in the Figma mockups the category title above the button is always appearing but, as you can see this information is at the category level in the json which is correct. But this is creating some difficulties with the Favorites section. As you know, Favorites are not from one category only, to the contrary the favorite list could have elements from different categories.
+
+So we can't know from which category is any item in our favorite list if we don't have the category title at the Item level. So I've had to do some tweaks to resolve this. I had to add the property `categoryLevel` to the item when adding it to favorites and also on the default favorites values.
+
+This won't be a problem in a real case scenario because the favorite list should come from our BE and somehow it should have the category with it. Another solution could be changing a bit the design to add list under the FAVORITES list but I don't feel this necessary as I like the current design. 
+
+Other solution we'll be to order the Favorites items without telling the user, so it will always appear all the items from one category next all the items of the next category and so on, but I don't know if this was the UX intention. So favorites structure will be like the JSON structure with categories and items under categories. 
+
+Any of these solution fixes this minor issue of adding this property to the item in the UI.
+
+Hope I've explained myselft correctly, if don't I could explain this later on a call.
 
 
