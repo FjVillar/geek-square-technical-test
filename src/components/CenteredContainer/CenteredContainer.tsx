@@ -1,9 +1,15 @@
 import styled from "@emotion/styled";
 
-const CenteredContainer = styled("div")({
-  margin: "auto",
-  width: "50%",
-  padding: "10px",
-});
+interface CenteredContainerProps {
+  isMobile: boolean;
+}
+
+const CenteredContainer = styled("div")<CenteredContainerProps>(
+  ({ isMobile }) => ({
+    margin: "auto",
+    width: isMobile ? "90%" : "80%",
+    padding: "10px",
+  })
+);
 
 export default CenteredContainer;
