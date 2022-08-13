@@ -24,7 +24,12 @@ const Item: FC<ItemProps> = ({
   category,
   actionButton,
 }) => (
-  <GridContainer rows={[300, 35, 100, 35, 35]} columns={1} spacing={10}>
+  <GridContainer
+    data-testid={title}
+    rows={[300, 35, 100, 35, 35]}
+    columns={1}
+    spacing={10}
+  >
     <StyledImg src={imageUrl} />
     <Typography variant="title">{title}</Typography>
     <Typography variant="caption">{description}</Typography>
