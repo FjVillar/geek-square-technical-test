@@ -30,4 +30,15 @@ I've created a tiny server project to serve the JSON with the data to be consume
 
 I didn't have the need to this point to add Redux for app state management. Because to fullfil the requirements of the technical test it's not necessary, but in a real case scenario where we have several modules or more shared data through the application It would came necessary to add some kind of global application state management or at least React Context.
 
+## Styling solution with Emotion
+
+I have decided to include Emotion to allow me to write CSS in JS. As you can see you can create dynamic styled components like `components/GridContainer` that allow us to have a dynamic grid to create our basic layouts or `components/Typography` to apply font styles to every text.
+
+## useMediaQuery hook for responsiveness
+
+I have created a React hook to know if we are in Mobile or in a Desktop viewport. Is only custom hook I've decided to create for now, it simply uses
+window match Media with an EventListener attached to it. When we resize the application the hook changes it result value. 
+
+
+
 
