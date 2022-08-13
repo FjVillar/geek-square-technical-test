@@ -67,7 +67,7 @@ const Categories: FC = () => {
         {isLoading && "Cargando..."}
         {error && `Ha ocurrido un error al cargar los datos: ${error}`}
         {!isLoading && (
-          <GridContainer rows={3} columns={1} spacing={20}>
+          <GridContainer rows={3} columns={1} spacing={45}>
             <ItemList
               sectionTitle="FAVORITOS"
               items={favorites}

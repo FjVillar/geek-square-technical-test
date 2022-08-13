@@ -3,15 +3,20 @@ import { FC } from "react";
 import { Typography } from "../../../../components/Typography";
 import { colors } from "../../../../components/Typography/Typography";
 
-const RemoveFavoriteButton = styled("button")({
-  backgroundColor: "rgb(255,255,255)",
+const buttonCommonStyles = {
   padding: "8px",
+  cursor: "pointer",
+};
+
+const RemoveFavoriteButton = styled("button")({
+  ...buttonCommonStyles,
+  backgroundColor: "rgb(255,255,255)",
   border: `1px solid ${colors.delete}`,
 });
 
 const AddFavoriteButton = styled("button")({
+  ...buttonCommonStyles,
   backgroundColor: "rgb(0,0,0)",
-  padding: "8px",
   border: "none",
 });
 
@@ -29,11 +34,13 @@ const ActionByStateButton: FC<ActionByStateButtonProps> = ({
       <Typography variant="button">Eliminar favoritos </Typography>
     </RemoveFavoriteButton>
   ) : (
-    <AddFavoriteButton onClick={handleAction}>
-      <Typography variant="button" color="secondary">
-        Favoritos
-      </Typography>
-    </AddFavoriteButton>
+    <>
+      <AddFavoriteButton onClick={handleAction}>
+        <Typography variant="button" color="secondary">
+          Favoritos
+        </Typography>
+      </AddFavoriteButton>
+    </>
   );
 
 export default ActionByStateButton;
