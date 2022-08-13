@@ -1,12 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { FC, useState } from "react";
+import { CenteredContainer } from "../components/CenteredContainer";
 import { GridContainer } from "../components/GridContainer";
+import { useMediaQuery } from "../hooks";
 
 import getCategories from "./api";
 import { getCategoriesResponse } from "./api";
 import { ItemList } from "./List";
-import { ActionByStateButton } from "./List/Item/ActionByStateButton";
 import { CategoryItem } from "./types";
 
 const defaultFavorites = [
@@ -34,24 +35,48 @@ const Categories: FC = () => {
     getCategories
   );
 
+  const isMobile = useMediaQuery();
+
   const [favorites, setFavorites] = useState<CategoryItem[]>(defaultFavorites);
 
+  const handleRemoveFromFavorites = (item: CategoryItem) => {
+    const newFavorites = favorites.filter(
+      (favorite) => favorite.id !== item.id
+    );
+    setFavorites(newFavorites);
+  };
+
+  const handleAddToFavorites = (item: CategoryItem) => {
+    const alreadyInFavoriteItem = favorites.find(
+      (favorite) => favorite.id === item.id
+    );
+
+    // If we haven't found the item in the current favorite list, we add it
+    if (alreadyInFavoriteItem === undefined) {
+      setFavorites([...favorites, item]);
+    }
+  };
+
   return (
-    <GridContainer rows={3} columns={1} spacing={20}>
-      <ItemList
-        sectionTitle="FAVORITOS"
-        items={favorites}
-        actionButton={<ActionByStateButton isFavorite />}
-      />
-      {data?.categories.map((category) => (
+    <CenteredContainer isMobile={isMobile}>
+      <GridContainer rows={3} columns={1} spacing={20}>
         <ItemList
-          key={category.title}
-          sectionTitle={category.title}
-          items={category.items}
-          actionButton={<ActionByStateButton />}
+          sectionTitle="FAVORITOS"
+          items={favorites}
+          handleAction={handleRemoveFromFavorites}
+          emptyListMessage="Ups, parece que esto esta muy vacio. Añade algunos favoritos!"
+          isFavorite
         />
-      ))}
-    </GridContainer>
+        {data?.categories.map((category) => (
+          <ItemList
+            key={category.title}
+            sectionTitle={category.title}
+            items={category.items}
+            handleAction={handleAddToFavorites}
+          />
+        ))}
+      </GridContainer>
+    </CenteredContainer>
   );
 };
 

@@ -3,10 +3,6 @@ import { FC } from "react";
 import { Typography } from "../../../../components/Typography";
 import { colors } from "../../../../components/Typography/Typography";
 
-interface ActionByStateButtonProps {
-  isFavorite?: boolean;
-}
-
 const RemoveFavoriteButton = styled("button")({
   backgroundColor: "rgb(255,255,255)",
   padding: "8px",
@@ -19,13 +15,21 @@ const AddFavoriteButton = styled("button")({
   border: "none",
 });
 
-const ActionByStateButton: FC<ActionByStateButtonProps> = ({ isFavorite }) =>
+interface ActionByStateButtonProps {
+  isFavorite?: boolean;
+  handleAction: () => void;
+}
+
+const ActionByStateButton: FC<ActionByStateButtonProps> = ({
+  isFavorite,
+  handleAction,
+}) =>
   isFavorite ? (
-    <RemoveFavoriteButton>
+    <RemoveFavoriteButton onClick={handleAction}>
       <Typography variant="button">Eliminar favoritos </Typography>
     </RemoveFavoriteButton>
   ) : (
-    <AddFavoriteButton>
+    <AddFavoriteButton onClick={handleAction}>
       <Typography variant="button" color="secondary">
         Favoritos
       </Typography>

@@ -1,9 +1,10 @@
 import styled from "@emotion/styled";
-import { FC, ReactElement } from "react";
+import { FC } from "react";
 import { CategoryItem } from "../../Categories/types";
 import { GridContainer } from "../../components/GridContainer";
 import Item from "./Item/Item";
 import { Typography } from "../../components/Typography";
+import { ActionByStateButton } from "./Item/ActionByStateButton";
 
 const StyledGridContainer = styled(GridContainer)({
   overflowY: "hidden",
@@ -34,29 +35,51 @@ const StyledGridContainer = styled(GridContainer)({
 interface ItemListProps {
   items: CategoryItem[];
   sectionTitle: string;
-  actionButton: ReactElement;
+  isFavorite?: boolean;
+  emptyListMessage?: string;
+  handleAction: (item: CategoryItem) => void;
 }
 
-const ItemList: FC<ItemListProps> = ({ items, sectionTitle, actionButton }) => (
-  <>
-    <Typography variant="section">{sectionTitle}</Typography>
-    <StyledGridContainer
-      columns={items.length}
-      rows={1}
-      spacing={20}
-      columnSize={200}
-    >
-      {items.map(({ id, image_url, title, description }) => (
-        <Item
-          key={id}
-          imageUrl={image_url}
-          title={title}
-          description={description}
-          actionButton={actionButton}
-        />
-      ))}
-    </StyledGridContainer>
-  </>
-);
+const ItemList: FC<ItemListProps> = ({
+  items,
+  sectionTitle,
+  isFavorite,
+  emptyListMessage = "Ups, parece que esto esta vacio",
+  handleAction,
+}) => {
+  const handleActionByState = (item: CategoryItem) => {
+    handleAction(item);
+  };
+
+  return (
+    <>
+      <Typography variant="section">{sectionTitle}</Typography>
+      <StyledGridContainer
+        columns={items.length}
+        rows={1}
+        spacing={20}
+        columnSize={200}
+      >
+        {items.map(({ id, image_url, title, description }) => (
+          <Item
+            key={id}
+            imageUrl={image_url}
+            title={title}
+            description={description}
+            actionButton={
+              <ActionByStateButton
+                isFavorite={isFavorite}
+                handleAction={() =>
+                  handleActionByState({ id, image_url, title, description })
+                }
+              />
+            }
+          />
+        ))}
+        {items.length === 0 && `${emptyListMessage}`}
+      </StyledGridContainer>
+    </>
+  );
+};
 
 export default ItemList;

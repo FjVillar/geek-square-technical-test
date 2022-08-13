@@ -3,18 +3,18 @@ import { FC, ReactElement } from "react";
 import { GridContainer } from "../../../components/GridContainer";
 import { Typography } from "../../../components/Typography";
 
+const StyledImg = styled("img")({
+  objectFit: "cover",
+  width: "100%",
+  height: "100%",
+});
+
 interface ItemProps {
   imageUrl: string;
   title: string;
   description: string;
   actionButton: ReactElement;
 }
-
-const StyledImg = styled("img")({
-  objectFit: "cover",
-  width: "100%",
-  height: "100%",
-});
 
 const Item: FC<ItemProps> = ({
   imageUrl,
